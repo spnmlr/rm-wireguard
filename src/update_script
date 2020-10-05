@@ -1,0 +1,21 @@
+#!/bin/sh
+# script by https://github.com/jens-maus
+
+ADDONS_DIR=/usr/local/addons/wireguard
+RCD_DIR=/usr/local/etc/config/rc.d
+
+mkdir -p $ADDONS_DIR
+chmod 755 $ADDONS_DIR
+mkdir -p $RCD_DIR
+chmod 755 $RCD_DIR
+
+# remove old stuff
+rm -f $ADDONS_DIR/*
+
+# copy all stuff and setup rc.d
+cp wg0.conf $ADDONS_DIR/
+cp wireguard $RCD_DIR/
+chmod +x $RCD_DIR/wireguard
+
+# sync filesystem to make sure all changes are written to disk
+sync
